@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin-left: 20px;
+	margin-top: 20px;
+	font-family: "Arial";
+	font-size: 24px;
+	font-family: "Arial";
+	box-sizing: border-box;
+}
+
+.button {
+	font-family: "Arial";
+	font-size: 24px;
+	display: inline;
+}
+
+.table {
+	border: 1px solid;
+	border-collapse: collapse;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.user_table {
+	border: 1px solid;
+	border-collapse: collapse;
+	width: 50%;
+	margin: 0 auto;
+}
+.td {
+	text-align: center;
+	padding: 0 10px;
+	border: 1px solid;
+	border-collapse: collapse;
+}
+
+.th {
+	border: 1px solid;
+	border-collapse: collapse;
+	padding: 0 10px;
+}
+
+.service_table {
+	border: 1px solid;
+	border-collapse: collapse;
+}
+
+.form {
+	width: 200px;
+	display: compact;
+}
+
+.buttons {
+	width: 1px;
+}
+
+.wrapper {
+	width: 100%;
+	display: flex;
+}
+
+.filter {
+	width: 30%;
+}
+
+.content {
+	width: 70%;
+}
+
+.page_header {
+	width: 100%;
+	text-align: center;
+}
+
+.table_button {
+	font-family: "Arial";
+	font-size: 24px;
+	width: 60%;
+	margin: 0 auto;
+}
+
+input {
+	font-size:20px;
+	
+}

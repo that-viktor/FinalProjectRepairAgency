@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin-left: 20px;
+	margin-top: 20px;
+	font-family: "Arial";
+	font-size: 24px;
+	font-family: "Arial";
+	box-sizing: border-box;
+}
+
+.button {
+	font-family: "Arial";
+	font-size: 24px;
+	display: inline;
+}
+
+.table {
+	margin: 0 auto;
+	border: 1px solid;
+	border-collapse: collapse;
+}
+
+.td {
+	text-align: center;
+	padding: 0 10px;
+	border: 1px solid;
+	border-collapse: collapse;
+}
+
+.th {
+	border: 1px solid;
+	border-collapse: collapse;
+	padding: 0 10px;
+}
+
+.service_table {
+	border: 1px solid;
+	border-collapse: collapse;
+}
+
+.form {
+	width: 200px;
+	display: compact;
+}
+
+.buttons {
+	width: 1px;
+}
+
+.wrapper {
+	width: 100%;
+	display: flex;
+}
+
+.filter {
+	width: 30%;
+}
+
+.content {
+	width: 70%;
+}
