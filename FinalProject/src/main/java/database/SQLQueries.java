@@ -1,5 +1,10 @@
 package database;
 
+/**
+ * SQLQueries class contains all the SQL queries to the DB, used in this application
+ * @author Viktor
+ *
+ */
 public abstract class SQLQueries {
 	public static final String INSERT_NEW_ACCOUNT = "INSERT INTO repair_agency.account (balance) VALUES (?);";
 	public static final String TOP_UP_BALANCE = "UPDATE repair_agency.account SET balance = balance + ? "
@@ -48,5 +53,10 @@ public abstract class SQLQueries {
 	public static final String REMOVE_MASTER_BY_ID_RECEIPT = "UPDATE repair_agency.receipt SET idmaster = NULL WHERE idreceipt = ?;";
 	public static final String GET_RECEIPTS_FILTERED_BY_ID_MASTER = "SELECT * FROM repair_agency.receipt WHERE idmaster = ?;";
 	public static final String GET_SERVICES_LIMITED = "SELECT * FROM repair_agency.service LIMIT ? OFFSET ?";
-	
+	public static final String GET_USER_RECEIPTS = "SELECT * FROM repair_agency.receipt WHERE iduser = ?;";
+	public static final String GET_SERVICE_PRICE_BY_ID = "SELECT price_per_unit FROM repair_agency.service WHERE idservice = ?;";
+	public static final String GET_ALL_COMMENTS = "SELECT * FROM repair_agency.comment;";
+	public static final String CREATE_COMMENT = "INSERT INTO repair_agency.comment (iduser, comment_text, comment_date) VALUES (?, ?, ?);";
+	public static final String DELETE_COMMENT_BY_ID = "DELETE FROM repair_agency.comment WHERE idcomment = ?;";
+	public static final String GET_ALL_MASTER_RECEIPTS = "SELECT * FROM repair_agency.receipt WHERE idmaster = ? AND idstatus IN (2, 4);";
 }

@@ -1,16 +1,22 @@
 package entities;
 
+/**
+ * ReceiptService class is a class that describes the DB entity - ReceiptService
+ * 
+ * @author Viktor
+ *
+ */
 public class ReceiptService {
     private long receiptId;
     private long serviceId;
-    private double service_price;
+    private double servicePrice;
 
     public double getServicePrice() {
-		return service_price;
+		return servicePrice;
 	}
 
-	public void setService_price(double service_price) {
-		this.service_price = service_price;
+	public void setServicePrice(double servicePrice) {
+		this.servicePrice = servicePrice;
 	}
 
 	public long getReceiptId() {
@@ -33,8 +39,15 @@ public class ReceiptService {
     	
     }
     
-    public ReceiptService(long serviceId, double service_price) {
+    public ReceiptService(long serviceId, double servicePrice) {
     	this.serviceId = serviceId;
-    	this.service_price = service_price;
+    	this.servicePrice = servicePrice;
     }
+
+	@Override
+	public String toString() {
+		return "ReceiptService [receiptId=" + receiptId + ", serviceId=" + serviceId + ", servicePrice=" + servicePrice
+				+ "]";
+	}
+    
 }

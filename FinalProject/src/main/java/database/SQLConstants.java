@@ -1,5 +1,10 @@
 package database;
 
+/**
+ * SQLConstants class provides a names of the DB fields to simplify their refactoring
+ * @author Viktor
+ *
+ */
 public abstract class SQLConstants {
 	public static final String ID_USER = "iduser";
 	public static final String LOGIN = "login";
@@ -36,4 +41,13 @@ public abstract class SQLConstants {
 	public static final String AMOUNT_OF_WORK = "amount_of_work";
 	public static final String SUM_TO_INCREASE_BALANCE = "sum";
 	public static final int LIMIT = 5;
+	public static final String ID_COMMENT = "idcomment";
+	public static final String COMMENT_TEXT = "comment_text";
+	public static final String COMMENT_DATE = "comment_date";
+	public static final String STATUS_WAITING_FOR_PAYMENT = "waiting for payment";
+	public static final String STATUS_PAYED = "payed";
+	public static final String STATUS_CANCELLED = "cancelled";
+	public static final String STATUS_PROCESSING = "processing";
+	public static final String STATUS_PROCESSED = "processed";
+	
 }

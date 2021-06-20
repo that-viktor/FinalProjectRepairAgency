@@ -8,6 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * LoginServlet class provides login form to users. After authentication process
+ * user will pass authorization process to start work
+ * 
+ * @author Viktor
+ *
+ */
 @WebServlet("/login")
 public final class LoginServlet extends HttpServlet {
 	@Override

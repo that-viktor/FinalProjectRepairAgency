@@ -1,5 +1,10 @@
 package entities;
 
+/**
+ * Account class is a class that describes the DB entity - Account
+ * @author Viktor
+ *
+ */
 public class Account {
     private long accountId;
     private double balance;

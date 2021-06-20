@@ -9,14 +9,24 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1>List of masters</h1>
-	<c:forEach items="${requestScope.masters}" var="master">
-	${master}
-	<br>
-	</c:forEach>
+	<h1>List of masters</h1>
+	<table class="table">
+		<th class="th">Master no</th>
+		<th class="th">Master name</th>
+		<th class="th">Action</th>		
+		<c:forEach items="${requestScope.masters}" var="master">
+			<tr>
+			<td class="td">${master.id}</td>
+			<td class="td">${master.firstName} ${master.surname} ${master.lastName}</td>
+			<td class="td"><form action="/FinalProject/setmaster"><button class="button" name="idmaster" value="${master.id}">Set master</button></form></td>
+			</tr>
+			<br>
+		</c:forEach>
+	</table>
+
 	<br>
 	<form action="/FinalProject/details">
-		<button name="idreceipt" value="${requestScope.idreceipt}">Back</button>
+		<button name="idreceipt" value="${requestScope.idreceipt}" class="button">Back</button>
 	</form>
 </body>
 </html>

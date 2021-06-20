@@ -11,7 +11,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+/**
+ * This web-filer is used for setting the whole-application encoding to UTF-8
+ * @author Viktor
+ *
+ */
 @WebFilter("/*")
 public class EncodingFilter implements Filter {
 

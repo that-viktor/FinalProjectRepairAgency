@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ReceiptDAO;
-import dao.UserDAO;
+import dao.ServiceDAO;
 import database.SQLConstants;
-import exceptions.ReceiptException;
+import exceptions.DAOException;
 
 @WebServlet("/remove-master")
 public class RemoveMasterServlet extends HttpServlet {
@@ -21,12 +21,13 @@ public class RemoveMasterServlet extends HttpServlet {
 		try {
 			ReceiptDAO.removeMasterByReceiptId(id);
 			req.setAttribute("receipt", ReceiptDAO.getReceiptById(id));
-			req.setAttribute("client", ReceiptDAO.getReceiptUser(id));
+			req.setAttribute("client", ReceiptDAO.getReceiptClient(id));
 			req.setAttribute("admin", ReceiptDAO.getReceiptAdmin(id));
 			req.setAttribute("master", ReceiptDAO.getReceiptMaster(id));
+			req.setAttribute("services", ServiceDAO.getReceiptServices(id));
 			req.getRequestDispatcher("view/admin/receiptsInfo.jsp").forward(req, resp);
-		} catch(ReceiptException e) {
+		} catch(DAOException e) {
 			e.printStackTrace();
-		}
+		} 
 	}
 }

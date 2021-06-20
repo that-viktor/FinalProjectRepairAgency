@@ -1,40 +1,58 @@
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\receipt\ReceiptDetailsServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\admin\AdminServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\database\DBConnector.java
-D:\EPAM Final Project\FinalProject\src\main\java\entities\Role.java
-D:\EPAM Final Project\FinalProject\src\main\java\exceptions\AccountException.java
-D:\EPAM Final Project\FinalProject\src\main\java\exceptions\ServiceException.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\receipt\ReceiptsServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\master\MasterListServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\dao\UserDAO.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\ContextListener.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\master\MasterServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\register\CreateAccountServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\dao\ServiceDAO.java
-D:\EPAM Final Project\FinalProject\src\main\java\exceptions\ReceiptException.java
-D:\EPAM Final Project\FinalProject\src\main\java\entities\Receipt.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\register\RegistrationServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\filters\EncodingFilter.java
-D:\EPAM Final Project\FinalProject\src\main\java\exceptions\StatusException.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\login\LoginServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\client\ClientServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\exceptions\UserException.java
-D:\EPAM Final Project\FinalProject\src\main\java\entities\Account.java
-D:\EPAM Final Project\FinalProject\src\main\java\filters\AdminFilter.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\receipt\Test.java
-D:\EPAM Final Project\FinalProject\src\main\java\entities\ReceiptService.java
-D:\EPAM Final Project\FinalProject\src\main\java\dao\ReceiptDAO.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\ServiceSumServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\ServicesServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\LogoutServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\dao\StatusDAO.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\receipt\RemoveReceiptServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\MainPageServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\entities\Review.java
-D:\EPAM Final Project\FinalProject\src\main\java\entities\User.java
-D:\EPAM Final Project\FinalProject\src\main\java\servlets\HomepageServlet.java
-D:\EPAM Final Project\FinalProject\src\main\java\database\SQLQueries.java
-D:\EPAM Final Project\FinalProject\src\main\java\entities\Status.java
-D:\EPAM Final Project\FinalProject\src\main\java\dao\AccountDAO.java
-D:\EPAM Final Project\FinalProject\src\main\java\database\SQLConstants.java
-D:\EPAM Final Project\FinalProject\src\main\java\entities\Service.java
+D:\JavaRepository\FinalProject\src\main\java\entities\Status.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\master\MasterReceiptDetailsServlet.java
+D:\JavaRepository\FinalProject\src\main\java\dao\CommentDAO.java
+D:\JavaRepository\FinalProject\src\main\java\dao\StatusDAO.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\client\ClientProfileServlet.java
+D:\JavaRepository\FinalProject\src\main\java\dao\ServiceDAO.java
+D:\JavaRepository\FinalProject\src\main\java\entities\User.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\admin\AccountInfoServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\register\RegistrationServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\receipt\SuccessServlet.java
+D:\JavaRepository\FinalProject\src\main\java\entities\Receipt.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\filters\DateFilterServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\ServiceSumServlet.java
+D:\JavaRepository\FinalProject\src\main\java\tags\AdminCommentTag.java
+D:\JavaRepository\FinalProject\src\main\java\entities\Account.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\receipt\RemoveReceiptServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\ServicesServlet.java
+D:\JavaRepository\FinalProject\src\main\java\dao\ReceiptDAO.java
+D:\JavaRepository\FinalProject\src\main\java\database\SQLQueries.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\admin\AdminCommentServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\client\ClientServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\MainPageServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\filters\MasterFilterServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\receipt\ReceiptsServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\AuthServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\admin\ClientsListServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\login\LoginServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\receipt\RemoveSeviceServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\admin\AdminServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\receipt\PaymentPageServlet.java
+D:\JavaRepository\FinalProject\src\main\java\database\DBManager.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\master\MasterListServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\master\SetMasterServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\register\CreateAccountServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\receipt\AddReceiptServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\receipt\ApproveSevlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\receipt\SubmitReceiptServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\master\ProcessReceiptServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\receipt\ReceiptDetailsServlet.java
+D:\JavaRepository\FinalProject\src\main\java\database\SQLConstants.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\AddServiceToReceiptServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\admin\AddFundsServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\ContextListener.java
+D:\JavaRepository\FinalProject\src\main\java\dao\UserDAO.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\master\MasterServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\comment\CommentsServlet.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\filters\ReceiptSumFilterServlet.java
+D:\JavaRepository\FinalProject\src\main\java\entities\ReceiptService.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\master\RemoveMasterServlet.java
+D:\JavaRepository\FinalProject\src\main\java\entities\Role.java
+D:\JavaRepository\FinalProject\src\main\java\entities\Comment.java
+D:\JavaRepository\FinalProject\src\main\java\dao\AccountDAO.java
+D:\JavaRepository\FinalProject\src\main\java\exceptions\DAOException.java
+D:\JavaRepository\FinalProject\src\main\java\filters\EncodingFilter.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\filters\StatusFilterServlet.java
+D:\JavaRepository\FinalProject\src\main\java\entities\Review.java
+D:\JavaRepository\FinalProject\src\main\java\servlets\LogoutServlet.java
+D:\JavaRepository\FinalProject\src\main\java\entities\Service.java

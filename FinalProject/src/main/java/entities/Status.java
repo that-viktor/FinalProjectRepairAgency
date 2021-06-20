@@ -1,5 +1,10 @@
 package entities;
-
+/**
+ * Status class is a class that describes the DB entity - Status
+ * 
+ * @author Viktor
+ *
+ */
 public class Status {
     private long id;
     private String name;

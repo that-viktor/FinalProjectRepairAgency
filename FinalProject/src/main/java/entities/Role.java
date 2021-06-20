@@ -1,5 +1,11 @@
 package entities;
 
+/**
+ * Role class is a class that describes the DB entity - Role
+ * 
+ * @author Viktor
+ *
+ */
 public class Role {
     private long id;
     private String name;

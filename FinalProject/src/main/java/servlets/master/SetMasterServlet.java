@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ReceiptDAO;
+import dao.ServiceDAO;
 import dao.UserDAO;
 import database.SQLConstants;
 import entities.Receipt;
-import exceptions.ReceiptException;
-import exceptions.UserException;
+import exceptions.DAOException;
 
 @WebServlet("/setmaster")
 public class SetMasterServlet extends HttpServlet {
@@ -27,15 +27,14 @@ public class SetMasterServlet extends HttpServlet {
 		try {
 			ReceiptDAO.setMasterForReceipt(UserDAO.getUserById(idmaster), r);
 			req.setAttribute("receipt", ReceiptDAO.getReceiptById(idreceipt));
-			req.setAttribute("client", ReceiptDAO.getReceiptUser(idreceipt));
+			req.setAttribute("client", ReceiptDAO.getReceiptClient(idreceipt));
 			req.setAttribute("admin", ReceiptDAO.getReceiptAdmin(idreceipt));
 			req.setAttribute("master", ReceiptDAO.getReceiptMaster(idreceipt));
+			req.setAttribute("services", ServiceDAO.getReceiptServices(idreceipt));
 			req.getRequestDispatcher("view/admin/receiptsInfo.jsp").forward(req, resp);
-		} catch (ReceiptException e) {
+		} catch (DAOException e) {
 			e.printStackTrace();
-		} catch (UserException e) {
-			e.printStackTrace();
-		}
+		} 
 	}
 
 }

@@ -4,6 +4,12 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+/**
+ * Receipt class is a class that describes the DB entity - Receipt
+ * 
+ * @author Viktor
+ *
+ */
 public class Receipt {
     private long id;
     private long userId;
@@ -12,8 +18,6 @@ public class Receipt {
     private Timestamp date;
     private double totalSum;
     private long statusId;
-    private static final String actualTimezone = "GMT+3";
-    private static final Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(actualTimezone));
     
     public long getId() {
         return id;
@@ -69,10 +73,6 @@ public class Receipt {
 
     public void setStatus(long statusId) {
         this.statusId = statusId;
-    }
-    
-    public static Calendar getCalendar() {
-    	return calendar;
     }
 
 	@Override

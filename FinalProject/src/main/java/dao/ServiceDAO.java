@@ -8,38 +8,57 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import database.DBManager;
 import database.SQLConstants;
 import database.SQLQueries;
 import entities.Receipt;
 import entities.Service;
-import exceptions.ReceiptException;
-import exceptions.ServiceException;
+import exceptions.DAOException;
+/**
+ * ServiceDAO provides API for manipulating DB entity Service like Java object
+ * @author Viktor
+ *
+ */
 
 public class ServiceDAO {
-	private static DBManager connector;
-
-	public static List<Service> getAllServices() throws ServiceException {
+	private static final Logger logger = LogManager.getLogger(ServiceDAO.class);
+	private static DBManager manager;
+	
+	/**
+	 * Retrieves all the services from the DB
+	 * @return List of services
+	 * @throws DAOException
+	 */
+	public static List<Service> getAllServices() throws DAOException {
 		List<Service> services = new ArrayList<>();
-		connector = DBManager.getInstance();
-		try (Connection connection = connector.getConnection();
+		manager = DBManager.getInstance();
+		try (Connection connection = manager.getConnection();
 				Statement stmt = connection.createStatement();
 				ResultSet rs = stmt.executeQuery(SQLQueries.GET_ALL_SERVICES)) {
 			while (rs.next()) {
 				services.add(mapService(rs));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new ServiceException("Error while recieving a list of services!");
+			logger.error("Error while retrieving a list of services!", e);
+			throw new DAOException("Error while retrieving a list of services!");
 		}
 		return services;
 	}
-
-	public static Service getServiceById(long id) throws ServiceException {
-		connector = DBManager.getInstance();
+	
+	/**
+	 * Retrieves a service from DB by a specified id
+	 * @param service id
+	 * @return Service object
+	 * @throws DAOException
+	 */
+	public static Service getServiceById(long id) throws DAOException {
+		manager = DBManager.getInstance();
 		Service s = new Service();
 		ResultSet rs = null;
-		try (Connection connection = connector.getConnection();
+		try (Connection connection = manager.getConnection();
 				PreparedStatement pst = connection.prepareStatement(SQLQueries.GET_SERVICE_BY_ID)) {
 			pst.setLong(1, id);
 			rs = pst.executeQuery();
@@ -49,8 +68,8 @@ public class ServiceDAO {
 				s.setPrice(rs.getDouble(SQLConstants.PRICE_PER_UNIT));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new ServiceException("Error searching service!");
+			logger.error("Error getting service by id " + id, e);
+			throw new DAOException("Error getting service by id " + id);
 		} finally {
 			DBManager.close(rs);
 		}
@@ -64,12 +83,18 @@ public class ServiceDAO {
 		s.setPrice(rs.getDouble(SQLConstants.PRICE_PER_UNIT));
 		return s;
 	}
-
-	public static List<Service> getReceiptServices(long id) throws ServiceException {
-		connector = DBManager.getInstance();
+	
+	/**
+	 * Returns all the services of the specified receipt
+	 * @param receipt id
+	 * @return List of services
+	 * @throws DAOException
+	 */
+	public static List<Service> getReceiptServices(long id) throws DAOException {
+		manager = DBManager.getInstance();
 		List<Service> services = new ArrayList<>();
 		ResultSet rs = null;
-		try (Connection connection = connector.getConnection();
+		try (Connection connection = manager.getConnection();
 				PreparedStatement pst = connection.prepareStatement(SQLQueries.GET_RECEIPT_SERVICES);) {
 			pst.setLong(1, id);
 			rs = pst.executeQuery();
@@ -78,16 +103,22 @@ public class ServiceDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new ServiceException("Error getting receipt id = " + id + " services!");
+			throw new DAOException("Error getting receipt id = " + id + " services!");
 		}
 		return services;
 	}
 	
-	public static List<Service> getServicesLimited(int offset) throws ServiceException {
-		connector = DBManager.getInstance();
+	/**
+	 * Retrieves services from the DB limited by parameter LIMIT (default LIMIT = 5) using offset
+	 * @param offset
+	 * @return List of services limited by LIMIT
+	 * @throws DAOException
+	 */
+	public static List<Service> getServicesLimited(int offset) throws DAOException {
+		manager = DBManager.getInstance();
 		List<Service> receipts = new ArrayList<>();
 		ResultSet rs = null;
-		try (Connection connection = connector.getConnection();
+		try (Connection connection = manager.getConnection();
 				PreparedStatement pst = connection.prepareStatement(SQLQueries.GET_SERVICES_LIMITED)) {
 			pst.setInt(1, SQLConstants.LIMIT);
 			pst.setInt(2, offset);
@@ -96,9 +127,33 @@ public class ServiceDAO {
 				receipts.add(mapService(rs));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new ServiceException("Error getting receipts limited by " + SQLConstants.LIMIT + " with offset " + offset);
+			logger.error("Error getting receipts limited by " + SQLConstants.LIMIT + " with offset " + offset + "!", e);
+			throw new DAOException("Error getting receipts limited by " + SQLConstants.LIMIT + " with offset " + offset);
 		}
 		return receipts;
+	}
+	
+	/**
+	 * Returns the price of the service with specified id
+	 * @param service id
+	 * @return Service price (double)
+	 * @throws DAOException
+	 */
+	public static double getServicePriceById(long id) throws DAOException {
+		double price = 0;
+		manager = DBManager.getInstance();
+		ResultSet rs = null;
+		try (Connection connection = manager.getConnection();
+				PreparedStatement pst = connection.prepareStatement(SQLQueries.GET_SERVICE_PRICE_BY_ID)) {
+			pst.setLong(1, id);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				price = rs.getDouble(SQLConstants.PRICE_PER_UNIT);
+			}
+		} catch (SQLException e) {
+			logger.error("Error gettting price of service with id = " + id, e);
+			throw new DAOException("Error gettting price of service  with id = " + id);
+		}
+		return price;
 	}
 }

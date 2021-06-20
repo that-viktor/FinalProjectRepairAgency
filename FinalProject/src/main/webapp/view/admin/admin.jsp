@@ -11,6 +11,7 @@
 	Hello, ${sessionScope.admin.firstName}
 	<a href="/FinalProject/receipts">View Receipts</a>
 	<a href="/FinalProject/clients-list">Add funds to user</a>
+	<a href="/FinalProject/admin-comments">Check the comments</a>
 	<br>
 	<form action="/FinalProject/logout">
 		<button name="user_role" value="1" class="button">Logout</button>

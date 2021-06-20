@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+    version="2.1">
+    
+  <display-name>Final Project admin tag for comments</display-name>
+  <tlib-version>1.0</tlib-version>
+  <short-name>cmt</short-name>
+  <uri>http://tags/cmt</uri>
+
+  <tag>
+    <description>
+       Displays the comment object structure to the JSP page due to the task
+    </description>
+    <name>admin-comment</name>
+    <tag-class>tags.AdminCommentTag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+        <name>comment</name>
+        <required>true</required>
+        <rtexprvalue>true</rtexprvalue>
+        <type>entities.Comment</type>
+    </attribute>
+  </tag>
+  </taglib>

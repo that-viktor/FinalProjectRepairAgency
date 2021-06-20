@@ -1,5 +1,11 @@
 package entities;
 
+/**
+ * Service class is a class that describes the DB entity - Service
+ * 
+ * @author Viktor
+ *
+ */
 public class Service {
     private long id;
     private String name;

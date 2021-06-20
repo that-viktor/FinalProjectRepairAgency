@@ -8,42 +8,59 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import dao.ReceiptDAO;
 import dao.StatusDAO;
 import dao.UserDAO;
 import database.SQLConstants;
-import exceptions.ReceiptException;
-import exceptions.StatusException;
-import exceptions.UserException;
+import exceptions.DAOException;
+import servlets.comment.DeleteCommentServlet;
 
+/**
+ * The DateFilerServlet implements functionality of filtering all the receipts
+ * by date
+ * 
+ * @author Viktor
+ *
+ */
 @WebServlet("/date-filter")
 public class DateFilterServlet extends HttpServlet {
+	private static final Logger logger = LogManager.getLogger(DateFilterServlet.class);
+
+	/**
+	 * This method executes the filtering process by date. Ascending or descending
+	 * order depends on the request boolean parameter DESC
+	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String filter = req.getParameter(SQLConstants.REC_DATE);
 		if (filter.equals(SQLConstants.ASC)) {
 			try {
 				req.setAttribute("receipts", ReceiptDAO.getAllReceiptsOrderedByDate(false));
-			} catch (ReceiptException e) {
-				e.printStackTrace();
+			} catch (DAOException e) {
+				logger.error("Error getting all the receipts ordered by date ascending!", e);
 			}
-		} 
-		if(filter.equals(SQLConstants.DESC)) {
+		}
+		if (filter.equals(SQLConstants.DESC)) {
 			try {
 				req.setAttribute("receipts", ReceiptDAO.getAllReceiptsOrderedByDate(true));
-			} catch (ReceiptException e) {
-				e.printStackTrace();
+			} catch (DAOException e) {
+				logger.error("Error getting all the receipts ordered by date descending!", e);
 			}
 		}
 		try {
 			req.setAttribute("statuses", StatusDAO.getAllStatuses());
-		} catch (StatusException e) {
-			e.printStackTrace();
+		} catch (DAOException e) {
+			logger.error("Error getting all the statuses after filtering by date!", e);
 		}
 		try {
 			req.setAttribute("masters", UserDAO.getUsersByRole(SQLConstants.MASTER_ROLE_ID));
-		} catch (UserException e) {
-			e.printStackTrace();
+		} catch (DAOException e) {
+			logger.error(
+					"Error getting all users by role id " + SQLConstants.MASTER_ROLE_ID + " after filtering by date!",
+					e);
 		}
 		req.getRequestDispatcher("view/admin/receipts.jsp").forward(req, resp);
 	}

@@ -10,10 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ReceiptDAO;
+import dao.ServiceDAO;
 import database.SQLConstants;
 import entities.Receipt;
 import entities.User;
-import exceptions.ReceiptException;
+import exceptions.DAOException;
 
 @WebServlet("/approve")
 public class ApproveSevlet extends HttpServlet {
@@ -25,21 +26,22 @@ public class ApproveSevlet extends HttpServlet {
 		long idReceipt = Long.parseLong(req.getParameter(SQLConstants.ID_RECEIPT));
 		try {
 			r = ReceiptDAO.getReceiptById(idReceipt);
-		} catch (ReceiptException e) {
+		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 		try {
 			ReceiptDAO.setAdminForReceipt(u, r);
-		} catch (ReceiptException e) {
+		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 		try {
 			req.setAttribute("receipt", ReceiptDAO.getReceiptById(idReceipt));
-			req.setAttribute("client", ReceiptDAO.getReceiptUser(r.getId()));
+			req.setAttribute("client", ReceiptDAO.getReceiptClient(r.getId()));
 			req.setAttribute("admin", ReceiptDAO.getReceiptAdmin(r.getId()));
 			req.setAttribute("master", ReceiptDAO.getReceiptMaster(r.getId()));
+			req.setAttribute("services", ServiceDAO.getReceiptServices(idReceipt));
 			req.getRequestDispatcher("view/admin/receiptsInfo.jsp").forward(req, resp);
-		} catch (ReceiptException e) {
+		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 	}

@@ -5,82 +5,95 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Receipt ${requestScope.receipt.id} details</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 	<h1>Receipt services</h1>
-	Receipt no: ${receipt.id}
+	Receipt no: ${requestScope.receipt.id}
 	<br> Approved by:
-	<c:if test="${receipt.adminId == 0}">
+	<c:if test="${requestScope.receipt.adminId == 0}">
 		none
 	</c:if>
-	<c:if test="${receipt.adminId != 0}">
-	${admin.firstName} ${admin.lastName}<br> 
-	Admin phone: ${admin.phoneNum} <br>
+	<c:if test="${requestScope.receipt.adminId != 0}">
+	${requestScope.admin.firstName} ${requestScope.admin.lastName}<br> 
+	Admin phone: ${requestScope.admin.phoneNum} <br>
 	</c:if>
-	<br> Client: ${requestScope.client.firstName} ${requestScope.client.surname}
-	${requestScope.client.lastName}
-	<br> Client phone: ${requestScope.client.phoneNum}
+	<br> Client: ${client.firstName} ${client.surname}
+	${client.lastName}
+	<br> Client phone: ${client.phoneNum}
 	<br>
 	<br> Status:
-	<c:if test="${receipt.status == 1}">
+	<c:if test="${requestScope.receipt.status == 1}">
 		waiting for payment
 	</c:if>
-	<c:if test="${receipt.status == 2}">
+	<c:if test="${requestScope.receipt.status == 2}">
 		payed
 	</c:if>
-	<c:if test="${receipt.status == 3}">
+	<c:if test="${requestScope.receipt.status == 3}">
+		cancelled
+	</c:if>
+	<c:if test="${requestScope.receipt.status == 4}">
 		processing
 	</c:if>
-	<c:if test="${receipt.status == 4}">
-		ready
+	<c:if test="${requestScope.receipt.status == 5}">
+		processed
 	</c:if>
 	<br> Master:
-	<c:if test="${receipt.masterId == 0}">
+	<c:if test="${requestScope.receipt.masterId == 0}">
 		none
 	</c:if>
-	<c:if test="${receipt.masterId != 0}">
-		${master.firstName} ${master.lastName} 
+	<c:if test="${requestScope.receipt.masterId != 0}">
+		${requestScope.master.firstName} ${requestScope.master.lastName} 
 	</c:if>
 	<br>
-	<form action="/FinalProject/masterList" method="GET">
-		<button class="button" value="${requestScope.receipt.id}" name="idreceipt">Add master</button>
-	</form>
-	<form action="/removeMaster" method="GET" class="form">
-		<button class="button">Remove master</button>
-	</form>
-
+	<br>
+	<c:if test="${requestScope.receipt.masterId == 0}">
+		<form action="/FinalProject/masterList" method="GET">
+			<button class="button" value="${requestScope.receipt.id}"
+				name="idreceipt">Add master</button>
+		</form>
+	</c:if>
+	<c:if test="${requestScope.receipt.masterId != 0}">
+		<form action="/FinalProject/remove-master" method="GET" class="form">
+			<button class="button" name="idreceipt" value="${requestScope.receipt.id}">Remove master</button>
+		</form>
+	</c:if>
 	<br>
 	<br>
 	<table class="service_table">
 		<th class="th">Service name</th>
 		<th class="th">Service price</th>
-		<c:forEach items="${services}" var="service">
+		<c:forEach items="${requestScope.services}" var="service">
 			<tr>
 				<td class="td">${service.name}</td>
-				<td class="td">${service.price}</td>
+				<td class="td">${service.price} UAH</td>
 			</tr>
 		</c:forEach>
 		<tr>
 			<td class="td">Total sum:</td>
-			<td class="td">${receipt.totalSum}</td>
+			<td class="td">${requestScope.receipt.totalSum} UAH</td>
 		</tr>
 	</table>
 	<br>
-	<c:if test="${receipt.totalSum == 0.0}">
-		<form action="/FinalProject/count" method="get" >
-			<button class="button" name="idreceipt" value="${receipt.id}">Count
-				total sum</button>
+	<c:if test="${requestScope.receipt.totalSum == 0.0}">
+		<form action="/FinalProject/count" method="get">
+			<button class="button" name="idreceipt"
+				value="${requestScope.receipt.id}">Count total sum</button>
 		</form>
 		<br>
 	</c:if>
 	<div class="buttons">
-		<form action="/FinalProject/approve" class="form">
-			<button class="button">Approve</button>
-		</form>
+		<c:if test="${requestScope.receipt.adminId == 0 && receipt.totalSum != 0.0}">
+			<form action="/FinalProject/approve" class="form">
+				<button class="button" value="${requestScope.receipt.id}"
+					name="idreceipt">Approve</button>
+			</form>	<br>
+		</c:if>
+
 		<form action="/FinalProject/remove" method="POST" class="form">
-			<button value="${receipt.id}" name="idreceipt" class="button">Deny</button>
+			<button value="${requestScope.receipt.id}" name="idreceipt"
+				class="button">Cancel receipt</button>
 		</form>
 		<br>
 	</div>

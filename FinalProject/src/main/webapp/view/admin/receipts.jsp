@@ -63,7 +63,7 @@
 						<td class="td">${receipt.id}</td>
 						<td class="td"><fmt:formatDate pattern="dd-MM-yyyy HH:mm"
 								type="date" value="${receipt.date}" /></td>
-						<td class="td">${receipt.totalSum}UAH</td>
+						<td class="td">${receipt.totalSum} UAH</td>
 						<c:if test="${receipt.status == 1}">
 							<td class="td">waiting for payment</td>
 						</c:if>

@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.protobuf.ServiceException;
+
 import dao.ReceiptDAO;
 import dao.ServiceDAO;
-import dao.UserDAO;
 import database.SQLConstants;
-import exceptions.ReceiptException;
-import exceptions.ServiceException;
+import exceptions.DAOException;
 
 @WebServlet("/details")
 public class ReceiptDetailsServlet extends HttpServlet {
@@ -24,13 +24,11 @@ public class ReceiptDetailsServlet extends HttpServlet {
 			req.setAttribute("services", ServiceDAO.getReceiptServices(id));
 			req.getSession().setAttribute("receipt_for_master", ReceiptDAO.getReceiptById(id));
 			req.setAttribute("receipt", ReceiptDAO.getReceiptById(id));
-			req.setAttribute("client", ReceiptDAO.getReceiptUser(id));
+			req.setAttribute("client", ReceiptDAO.getReceiptClient(id));
 			req.setAttribute("admin", ReceiptDAO.getReceiptAdmin(id));
 			req.setAttribute("master", ReceiptDAO.getReceiptMaster(id));
 			req.getRequestDispatcher("view/admin/receiptsInfo.jsp").forward(req, resp);
-		} catch (ServiceException e) {
-			e.printStackTrace();
-		} catch (ReceiptException e) {
+		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 	}

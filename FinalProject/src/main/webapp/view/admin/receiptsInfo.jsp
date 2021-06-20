@@ -72,7 +72,7 @@
 		</c:forEach>
 		<tr>
 			<td class="td">Total sum:</td>
-			<td class="td">${requestScope.receipt.totalSum}UAH</td>
+			<td class="td">${requestScope.receipt.totalSum} UAH</td>
 		</tr>
 	</table>
 	<br>
@@ -84,7 +84,7 @@
 		<br>
 	</c:if>
 	<div class="buttons">
-		<c:if test="${requestScope.receipt.adminId == 0}">
+		<c:if test="${requestScope.receipt.adminId == 0 && receipt.totalSum != 0.0}">
 			<form action="/FinalProject/approve" class="form">
 				<button class="button" value="${requestScope.receipt.id}"
 					name="idreceipt">Approve</button>

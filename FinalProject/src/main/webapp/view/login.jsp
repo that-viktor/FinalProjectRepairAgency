@@ -9,8 +9,8 @@
 </head>
 <body>
 <form action="/FinalProject/auth" method="post">
-	<input type="text" value="admin" name="login" required><br>
-	<input type="password" value="admin" name="pass" required><br>
+	<input type="text" value="master" name="login" required><br>
+	<input type="password" value="master" name="pass" required><br>
 	<input type="submit" value="Login"><br>
 </form>
 <a href="/FinalProject/main">Home</a><br>

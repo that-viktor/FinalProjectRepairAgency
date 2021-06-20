@@ -21,11 +21,18 @@ body {
 }
 
 .table {
-	margin: 0 auto;
 	border: 1px solid;
 	border-collapse: collapse;
+	width: 90%;
+	margin: 0 auto;
 }
 
+.user_table {
+	border: 1px solid;
+	border-collapse: collapse;
+	width: 50%;
+	margin: 0 auto;
+}
 .td {
 	text-align: center;
 	padding: 0 10px;
@@ -64,4 +71,96 @@ body {
 
 .content {
 	width: 70%;
+}
+
+.page_header {
+	width: 100%;
+	text-align: center;
+	font-size:65px;
+	margin-bottom:100px;
+}
+
+.table_button {
+	font-family: "Arial";
+	font-size: 24px;
+	width: 60%;
+	margin: 0 auto;
+}
+
+input {
+	font-size:20px;
+}
+
+.pagination_button {
+	display: inline;
+	font-size: 24px;
+	width: 50px;
+	background-color: #0BA92D;
+	color: white;
+	border-radius:100px;
+}
+
+.pagination_button:hover {
+	cursor:pointer;
+	transition: 0.3s linear;
+	background-color:#06671B;
+}
+
+.pagination_block {
+	justify-content:center;
+	width:15%;
+	margin: 0 auto 100px auto;
+}
+
+.service_header {
+	font-size:24px;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.service_text {
+	font-size: 15px;
+}
+
+.profile_container {
+	width:100%;
+	display: flex;
+}
+
+.center_content {
+	width: 80%;
+	margin: 0 auto;
+	text-align:center;
+}
+.profile_info {
+	width:30%;
+	font-size: 22px;
+	text-align:justify;
+}
+
+.client_receipts {
+	width:70%;
+	padding: 0 10%;
+}
+
+.pay_button {
+	width:100px;
+	font-size:24px;
+	margin: 0 auto;
+}
+
+.content {
+	width: 80%;
+	margin: 0 auto;
+}
+
+.payment_block {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.center_header {
+	text-align: center;
+	margin: 0 auto;
 }

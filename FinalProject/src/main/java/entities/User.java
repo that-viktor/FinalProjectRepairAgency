@@ -1,5 +1,10 @@
 package entities;
-
+/**
+ * User class is a class that describes the DB entity - User
+ * 
+ * @author Viktor
+ *
+ */
 public class User {
     private long id;
     private String login;

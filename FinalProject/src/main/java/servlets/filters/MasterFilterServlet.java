@@ -8,30 +8,51 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import dao.ReceiptDAO;
 import dao.StatusDAO;
 import dao.UserDAO;
 import database.SQLConstants;
-import exceptions.ReceiptException;
-import exceptions.StatusException;
-import exceptions.UserException;
+import exceptions.DAOException;
 
+/**
+ * The MasterFilterServlet implements functionality of filtering all the
+ * receipts by master processing them
+ * 
+ * @author Viktor
+ *
+ */
 @WebServlet("/master-filter")
 public class MasterFilterServlet extends HttpServlet {
+	private static final Logger logger = LogManager.getLogger(MasterFilterServlet.class);
+
+	/**
+	 * This method executes the filtering process by master. The order depends on
+	 * master unique identifier (id) in the DB
+	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		long id = Long.parseLong(req.getParameter(SQLConstants.ID_MASTER));
 		try {
 			req.setAttribute("receipts", ReceiptDAO.getAllReceiptsFilteredByMaster(id));
-			req.setAttribute("statuses", StatusDAO.getAllStatuses());
-			req.setAttribute("masters", UserDAO.getUsersByRole(SQLConstants.MASTER_ROLE_ID));
-			req.getRequestDispatcher("view/admin/receipts.jsp").forward(req, resp);
-		} catch (ReceiptException e) {
-			e.printStackTrace();
-		} catch (StatusException e) {
-			e.printStackTrace();
-		} catch (UserException e) {
-			e.printStackTrace();
+		} catch (DAOException e2) {
+			logger.error("Error getting all the receipts filtered by master id = " + id + "!", e2);
 		}
+		try {
+			req.setAttribute("statuses", StatusDAO.getAllStatuses());
+		} catch (DAOException e1) {
+			logger.error("Error getting all the statuses after filtering all the receipts by master id = " + id + "!",
+					e1);
+		}
+		try {
+			req.setAttribute("masters", UserDAO.getUsersByRole(SQLConstants.MASTER_ROLE_ID));
+
+		} catch (DAOException e) {
+			logger.error("Error getting all the users by role id = " + SQLConstants.MASTER_ROLE_ID
+					+ " after filtering all the receipts by master!", e);
+		}
+		req.getRequestDispatcher("view/admin/receipts.jsp").forward(req, resp);
 	}
 }

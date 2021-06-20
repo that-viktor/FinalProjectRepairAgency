@@ -8,9 +8,16 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-	<p>Hello, ${sessionScope.client.login}!</p>
+	Hello, ${sessionScope.client.login}!
 	<a href="/FinalProject/client-profile">Profile</a>
+	<a href="/FinalProject/client-comments">Leave a comment</a>
+	 Balance ${account.balance} UAH
+	<c:if test="${servicesCount > 0 }">
+		You have ${servicesCount} services chosen
+		<form action="/FinalProject/add-receipt">
+			<button class="button">Checkout</button>
+		</form>
+	</c:if>
 	<form action="/FinalProject/logout">
 		<button name="user_role" value="2" class="button">Logout</button>
 	</form>
@@ -18,19 +25,22 @@
 	<br>
 	<br>
 	<c:forEach items="${requestScope.services}" var="service">
-		<p>Service no ${service.id}</p>
-		<p>${service.name}</p>
-		<p>${service.price}UAH</p>
-		<form action="/add-to-receipt">
-			<button name="idservice" value="${service.id}" class="button">Add
-				to receipt</button>
-		</form>
+		<p class="service_header">${service.name}</p>
+		<p class="service_text">${service.price}UAH</p>
+		<c:if test="${selectedService != service.id}">
+			<form action="/FinalProject/add-service">
+				<button name="idservice" value="${service.id}" class="button">Add
+					to receipt</button>
+			</form>
+		</c:if>
+		<br>
 		<hr>
 		<br>
 	</c:forEach>
-	<form action="/FinalProject/client">
+	<form action="/FinalProject/client" class="pagination_block">
 		<c:forEach items="${pages}" var="page">
-			<button name="page" value="${page}" style="display:inline;">${page}</button>
+			<button name="page" value="${page}" style="display: inline;"
+				class="pagination_button">${page}</button>
 		</c:forEach>
 	</form>
 </body>

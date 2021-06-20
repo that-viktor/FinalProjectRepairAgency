@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ReceiptDAO;
 import database.SQLConstants;
-import exceptions.ReceiptException;
+import exceptions.DAOException;
 
 @WebServlet("/remove")
 public class RemoveReceiptServlet extends HttpServlet {
@@ -20,7 +20,7 @@ public class RemoveReceiptServlet extends HttpServlet {
 		try {
 			ReceiptDAO.updateReceiptStatusByReceiptId(receiptId, SQLConstants.STATUS_CANCELLED_ID);
 			resp.sendRedirect("/FinalProject/receipts");
-		} catch (ReceiptException e) {
+		} catch (DAOException e) {
 			e.printStackTrace();
 		}
 		
