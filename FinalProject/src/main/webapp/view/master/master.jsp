@@ -19,7 +19,7 @@
 						key="title" /></a>
 			</div>
 			<fmt:message
-						key="you_logged_as" /><b><fmt:message
+						key="you_logged_as" /> <b><fmt:message
 						key="master" /></b>
 		</div>
 	</div>

@@ -59,4 +59,6 @@ public abstract class SQLQueries {
 	public static final String CREATE_COMMENT = "INSERT INTO repair_agency.comment (iduser, comment_text, comment_date) VALUES (?, ?, ?);";
 	public static final String DELETE_COMMENT_BY_ID = "DELETE FROM repair_agency.comment WHERE idcomment = ?;";
 	public static final String GET_ALL_MASTER_RECEIPTS = "SELECT * FROM repair_agency.receipt WHERE idmaster = ? AND idstatus IN (2, 4);";
+	public static final String GET_USER_BY_PHONE_NUM = "SELECT * FROM repair_agency.user WHERE phone_num = ?;";
+	public static final String GET_USER_BY_EMAIL = "SELECT * FROM repair_agency.user WHERE email = ?;";
 }

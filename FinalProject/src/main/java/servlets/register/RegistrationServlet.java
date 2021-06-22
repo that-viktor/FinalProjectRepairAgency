@@ -33,15 +33,30 @@ public class RegistrationServlet extends HttpServlet {
 
 	/**
 	 * This method tries to register a new user with the data from the request. If
-	 * success, new user is added to the session. Otherwise an error page is displayed
+	 * success, new user is added to the session. Otherwise error page is displayed
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		User u = null;
+		boolean notExist = true;
 		try {
-			u = MySQLUserDAO.getUserByLogin(req.getParameter(SQLConstants.LOGIN));
-			if (u == null) {
-				u = new User();
+			User loginTest = MySQLUserDAO.getUserByLogin(req.getParameter(SQLConstants.LOGIN));
+			if (loginTest != null) {
+				notExist = false;
+				req.setAttribute("error_message", "User with this login already exists!");
+			}
+			User phoneNumTest = MySQLUserDAO.getUserByPhoneNum(SQLConstants.PHONE_NUM);
+			if (phoneNumTest != null) {
+				notExist = false;
+				req.setAttribute("error_message", "User with this phone number already exists!");
+			}
+			
+			User emailTest = MySQLUserDAO.getUserByEmail(SQLConstants.EMAIL);
+			if (emailTest != null) {
+				notExist = false;
+				req.setAttribute("error_message", "User with this email already exists!");
+			}
+			if (notExist == true) {
+				User u = new User();
 				u.setLogin(req.getParameter(SQLConstants.LOGIN));
 				u.setPassword(SimplePasswordEncoder.doEncoding(req.getParameter(SQLConstants.PASSWORD)));
 				u.setFirstName(req.getParameter(SQLConstants.FIRST_NAME));
@@ -54,12 +69,10 @@ public class RegistrationServlet extends HttpServlet {
 				req.getSession().setAttribute("client", MySQLUserDAO.getUserByLogin(u.getLogin()));
 				resp.sendRedirect("/FinalProject/client");
 			} else {
-				req.setAttribute("error_message", "User with this login already exists!");
 				req.getRequestDispatcher("view/error/error.jsp").forward(req, resp);
-				;
 			}
 		} catch (DAOException e) {
-			logger.error("Error registering a new user " + u);
+			logger.error("Error registering a new user!");
 		}
 
 	}

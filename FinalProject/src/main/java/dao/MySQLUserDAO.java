@@ -185,5 +185,57 @@ public class MySQLUserDAO {
 		pst.executeUpdate();
 		return pst;
 	}
+	
+	/**
+	 * This method retrieves the user from the DB by a specified phone num.
+	 * @param phoneNum
+	 * @return User or null, if no such user found
+	 * @throws DAOException
+	 */
+	public static User getUserByPhoneNum(String phoneNum) throws DAOException {
+		manager = DBManager.getInstance();
+		User u = null;
+		ResultSet rs = null;
+		try (Connection connection = manager.getConnection();
+				PreparedStatement pst = connection.prepareStatement(SQLQueries.GET_USER_BY_PHONE_NUM)) {
+			pst.setString(1, phoneNum);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				u = mapUser(rs);
+			}
+		} catch (SQLException e) {
+			logger.error("Error getting user by phone num = " + phoneNum);
+			throw new DAOException("Error getting user by phone num = " + phoneNum);
+		} finally {
+			DBManager.close(rs);
+		}
+		return u;
+	}
+	
+	/**
+	 * This method retrieves the user from the DB by a specified email.
+	 * @param email
+	 * @return User or null, if no such user found
+	 * @throws DAOException
+	 */
+	public static User getUserByEmail(String email) throws DAOException {
+		manager = DBManager.getInstance();
+		User u = null;
+		ResultSet rs = null;
+		try (Connection connection = manager.getConnection();
+				PreparedStatement pst = connection.prepareStatement(SQLQueries.GET_USER_BY_EMAIL)) {
+			pst.setString(1, email);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				u = mapUser(rs);
+			}
+		} catch (SQLException e) {
+			logger.error("Error getting user by email = " + email);
+			throw new DAOException("Error getting user by email = " + email);
+		} finally {
+			DBManager.close(rs);
+		}
+		return u;
+	}
 
 }
