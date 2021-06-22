@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/style.css" />
-<title>Insert title here</title>
+<title>Main</title>
 </head>
 <body>
 	<fmt:setLocale value="${sessionScope.lang}" />

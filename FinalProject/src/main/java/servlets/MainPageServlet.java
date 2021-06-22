@@ -22,7 +22,6 @@ public class MainPageServlet extends HttpServlet {
 		if (locale == null) {
 			req.getSession().setAttribute("lang", "en");
 		}
-		System.out.println("/main locale after setting " + req.getSession().getAttribute("lang"));
 		req.getRequestDispatcher("index.jsp").forward(req, resp);
 	}
 }
