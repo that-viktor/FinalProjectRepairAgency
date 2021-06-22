@@ -17,8 +17,10 @@ body {
 }
 
 .button {
+	width:80%;
+	margin: 0 auto;
 	font-family: "Arial";
-	font-size: 24px;
+	font-size: 18px;
 	display: inline;
 	border: none;
 	padding: 0;
@@ -287,6 +289,19 @@ textarea {
 	color: black;
 	margin: 0 auto;
 	width: 80%;
+	background-color: white;
+	opacity: 1;
+	border-radius: 10px;
+	display: flex;
+	padding: 30px 50px 50px 50px;
+	border-radius: 10px;
+}
+
+.pay_receipts_wrapper {
+	border: 2px solid white;
+	color: black;
+	margin: 0 auto;
+	width: 50%;
 	background-color: white;
 	opacity: 1;
 	border-radius: 10px;

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<fmt:setLocale value="${sessionScope.lang}" />
+<fmt:setBundle basename="locale" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,12 +15,14 @@
 	<div class="header">
 		<div class="bar">
 			<div class="website_header">
-				<a href="/FinalProject/main" class="main_title">Electronic
-					repair agency website</a>
+				<a href="/FinalProject/main" class="main_title"><fmt:message
+						key="title" /></a>
 			</div>
-			<a href="/FinalProject/receipts" class="a">View Receipts</a> <a
-				href="/FinalProject/clients-list" class="a">Add funds to user</a> <a
-				href="/FinalProject/admin-comments" class="a">Check the comments</a>
+			<a href="/FinalProject/receipts" class="a"><fmt:message
+					key="view_receipts" /></a> <a href="/FinalProject/clients-list"
+				class="a"><fmt:message key="add_funds_user" /></a> <a
+				href="/FinalProject/admin-comments" class="a"><fmt:message
+					key="check_comments" /></a>
 		</div>
 	</div>
 	<div class="content">
@@ -25,18 +30,28 @@
 		<div class="masters_wrapper">
 			<div class="center_text">
 
-				<h1>Receipt services</h1><hr>
-				Receipt no: ${requestScope.receipt.id} <br> Approved by:
+				<h1>
+					<fmt:message key="receipt_details" />
+				</h1>
+				<hr>
+				<fmt:message key="receipt_no" />
+				: ${requestScope.receipt.id} <br>
+				<fmt:message key="approved_by" />
+				:
 				<c:if test="${requestScope.receipt.adminId == 0}">
-		none
-	</c:if>
-				<c:if test="${requestScope.receipt.adminId != 0}">
-	${requestScope.admin.firstName} ${requestScope.admin.lastName}<br> 
-	Admin phone: ${requestScope.admin.phoneNum} <br>
+					<fmt:message key="none" />
 				</c:if>
-				<br> Client: ${client.firstName} ${client.surname}
-				${client.lastName} <br> Client phone: ${client.phoneNum} <br>
-				<br> Status:
+				<c:if test="${requestScope.receipt.adminId != 0}">
+	${requestScope.admin.firstName} ${requestScope.admin.lastName}<br>
+					<fmt:message key="admin_phone" />: ${requestScope.admin.phoneNum} <br>
+				</c:if>
+				<br>
+				<fmt:message key="client" />
+				: ${client.firstName} ${client.surname} ${client.lastName} <br>
+				<fmt:message key="client_phone" />
+				: ${client.phoneNum} <br> <br>
+				<fmt:message key="status" />
+				:
 				<c:if test="${requestScope.receipt.status == 1}">
 		waiting for payment
 	</c:if>
@@ -52,9 +67,12 @@
 				<c:if test="${requestScope.receipt.status == 5}">
 		processed
 	</c:if>
-				<br> Master:
+				<br>
+				<fmt:message key="master_filter" />
+				:
 				<c:if test="${requestScope.receipt.masterId == 0}">
-		none
+		<fmt:message
+					key="none" />
 	</c:if>
 				<c:if test="${requestScope.receipt.masterId != 0}">
 		${requestScope.master.firstName} ${requestScope.master.lastName} 
@@ -63,19 +81,22 @@
 				<c:if test="${requestScope.receipt.masterId == 0}">
 					<form action="/FinalProject/masterList" method="GET">
 						<button class="ref_button" value="${requestScope.receipt.id}"
-							name="idreceipt">Add master</button>
+							name="idreceipt"><fmt:message
+					key="add_master" /></button>
 					</form>
 				</c:if>
 				<c:if test="${requestScope.receipt.masterId != 0}">
 					<form action="/FinalProject/remove-master" method="GET">
 						<button class="remove_button" name="idreceipt"
-							value="${requestScope.receipt.id}">Remove master</button>
+							value="${requestScope.receipt.id}">
+							<fmt:message key="remove_master" />
+						</button>
 					</form>
 				</c:if>
 				<br> <br>
 				<table class="service_table">
-					<th class="th">Service name</th>
-					<th class="th">Service price</th>
+					<th class="th"><fmt:message key="service_name" /></th>
+					<th class="th"><fmt:message key="service_price" /></th>
 					<c:forEach items="${requestScope.services}" var="service">
 						<tr>
 							<td class="td">${service.name}</td>
@@ -83,7 +104,7 @@
 						</tr>
 					</c:forEach>
 					<tr>
-						<td class="td">Total sum:</td>
+						<td class="td"><fmt:message key="total_sum" />:</td>
 						<td class="td">${requestScope.receipt.totalSum}UAH</td>
 					</tr>
 				</table>
@@ -91,7 +112,8 @@
 				<c:if test="${requestScope.receipt.totalSum == 0.0}">
 					<form action="/FinalProject/count" method="get">
 						<button class="ref_button" name="idreceipt"
-							value="${requestScope.receipt.id}">Count total sum</button>
+							value="${requestScope.receipt.id}"><fmt:message
+					key="count_total_sum" /></button>
 					</form>
 					<br>
 				</c:if>
@@ -107,7 +129,9 @@
 					<c:if test="${requestScope.receipt.status != 3 }">
 						<form action="/FinalProject/remove" method="POST">
 							<button value="${requestScope.receipt.id}" name="idreceipt"
-								class="cancel_button">Cancel</button>
+								class="cancel_button">
+								<fmt:message key="cancel" />
+							</button>
 						</form>
 						<br>
 					</c:if>
@@ -118,7 +142,8 @@
 		</div>
 		<br>
 		<div class="center_form">
-			<a href="/FinalProject/receipts" class="ref_button">Back</a>
+			<a href="/FinalProject/receipts" class="ref_button"><fmt:message
+					key="back" /></a>
 		</div>
 	</div>
 

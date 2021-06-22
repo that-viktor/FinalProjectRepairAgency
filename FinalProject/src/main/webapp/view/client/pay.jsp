@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+	<fmt:setLocale value="${sessionScope.lang}" />
+	<fmt:setBundle basename="locale" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,28 +15,32 @@
 	<div class="header">
 		<div class="bar">
 			<div class="website_header">
-				<a href="/FinalProject/main" class="main_title">Electronic
-					repair agency website</a>
+				<a href="/FinalProject/main" class="main_title"><fmt:message
+						key="title" /></a>
 			</div>
-			<a href="/FinalProject/client" class="a">Services</a> <a
-				href="/FinalProject/client-profile" class="a">Profile</a> <a
-				href="/FinalProject/client-comments" class="a">Leave a comment</a>
-			Balance ${account.balance} UAH
+			<a href="/FinalProject/client" class="a"><fmt:message
+						key="services" /></a> <a
+				href="/FinalProject/client-profile" class="a"><fmt:message
+					key="profile" /></a> <a
+				href="/FinalProject/client-comments" class="a"><fmt:message
+					key="comments" /></a>
+			<fmt:message key="balance" /> ${account.balance} UAH
 		</div>
 	</div>
-	<h1 class="page_header">Payment info</h1>
+	<h1 class="page_header"><fmt:message
+						key="pay_info" /></h1>
 	<div class="content">
-		<div class="receipts_wrapper">
+		<div class="pay_receipts_wrapper">
 			<div class="payment_block">
-				<h2>Receipt no</h2>
+				<h2><fmt:message key="receipt_no" />:</h2>
 				${receiptToPay.id } <br> <br>
-				<h3>Receipt price:</h3>
+				<h3><fmt:message key="total_sum" />:</h3>
 				${receiptToPay.totalSum } UAH<br> <br>
-				<h3>Services</h3>
+				<h3><fmt:message key="services" /></h3><br>
 				<table class="table">
-					<th class="th">Service no</th>
-					<th class="th">Service name</th>
-					<th class="th">Service price</th>
+					<th class="th"><fmt:message key="service_no" /></th>
+					<th class="th"><fmt:message key="service_name" /></th>
+					<th class="th"><fmt:message key="service_price" /></th>
 					<c:forEach items="${services}" var="service">
 						<tr>
 							<td class="td">${service.id}</td>
@@ -43,10 +49,10 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<br>
+				<br><br>
 				<form action="/FinalProject/pay" method="post">
 					<button class="ref_button" name="idreceipt"
-						value="${receiptToPay.id}">Submit payment</button>
+						value="${receiptToPay.id}"><fmt:message key="submit_payment" /></button>
 				</form>
 				<br>
 
@@ -54,7 +60,7 @@
 		</div>
 		<br>
 		<form action="/FinalProject/client-profile" class="center_form">
-			<button class="ref_button">Back</button>
+			<button class="ref_button"><fmt:message key="back" /></button>
 		</form>
 	</div>
 </body>

@@ -29,9 +29,9 @@
 			<h3 class="form_header"><fmt:message key="login_message"/></h3>
 			<br>
 			<form action="/FinalProject/auth" method="post" class="center_form">
-				<label><fmt:message key="form_login"/></label><br> <input type="text" value="client"
+				<label><fmt:message key="form_login"/></label><br> <input type="text" value="admin"
 					name="login" required><br> <br> <label><fmt:message key="form_password"/></label><br>
-				<input type="password" value="client" name="pass" required
+				<input type="password" value="admin" name="pass" required
 					align="left"><br> <br> <input type="submit"
 					value="<fmt:message key="Login"/>" class="ref_button"><br> <br> <a
 					href="/FinalProject/main" class="ref_button"><fmt:message key="home_button"/></a>

@@ -103,7 +103,8 @@
 									test="${clientReceipt.status == 1 && clientReceipt.adminId != 0}">
 									<form action="/FinalProject/pay">
 										<button class="pay_button" name="idreceipt"
-											value="${clientReceipt.id}">Pay</button>
+											value="${clientReceipt.id}"><fmt:message
+						key="pay_button" /></button>
 									</form>
 								</c:if> <c:if test="${clientReceipt.status != 1 }">
 								Payed
