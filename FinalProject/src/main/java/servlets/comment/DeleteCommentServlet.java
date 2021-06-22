@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.CommentDAO;
+import dao.MySQLCommentDAO;
 import database.SQLConstants;
 import exceptions.DAOException;
 import servlets.client.ClientServlet;
@@ -40,12 +40,12 @@ public class DeleteCommentServlet extends HttpServlet {
 		} else {
 			long id = Long.parseLong(req.getParameter(SQLConstants.ID_COMMENT));
 			try {
-				CommentDAO.deleteCommentById(id);
+				MySQLCommentDAO.deleteCommentById(id);
 			} catch (DAOException e) {
 				logger.error("Error deleting comment by id " + id, e);
 			}
 			try {
-				req.getSession().setAttribute("adminComments", CommentDAO.getAllComments());
+				req.getSession().setAttribute("adminComments", MySQLCommentDAO.getAllComments());
 				resp.sendRedirect("/FinalProject/admin-comments");
 			} catch (DAOException e) {
 				logger.error("Error getting all the comments after deleting one!", e);

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.CommentDAO;
+import dao.MySQLCommentDAO;
 import entities.Comment;
 import entities.User;
 import exceptions.DAOException;
@@ -44,12 +44,12 @@ public class AddClientCommentServlet extends HttpServlet {
 			String commentText = req.getParameter("commentText");
 			User client = (User) req.getSession().getAttribute("client");
 			try {
-				CommentDAO.createComment(client, commentText);
+				MySQLCommentDAO.createComment(client, commentText);
 			} catch (DAOException e1) {
 				logger.error("Error while creating a comment!", e1);
 			}
 			try {
-				List<Comment> comments = CommentDAO.getAllComments();
+				List<Comment> comments = MySQLCommentDAO.getAllComments();
 				req.getSession().setAttribute("comments", comments);
 				req.getSession().setAttribute("commentsCount", comments.size());
 				resp.sendRedirect("/FinalProject/client-comments");

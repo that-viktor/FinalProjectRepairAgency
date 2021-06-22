@@ -9,19 +9,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import cryptho.SimplePasswordEncoder;
-import dao.AccountDAO;
-import dao.UserDAO;
+import dao.MySQLAccountDAO;
+import dao.MySQLUserDAO;
 import database.SQLConstants;
 import entities.User;
 import exceptions.DAOException;
+import servlets.service.ServiceSumServlet;
 
+/**
+ * RegistrationServlet class processes the data entered to the registration form
+ * and tries to register a new account
+ * 
+ * @author Viktor
+ *
+ */
 @WebServlet("/register")
 public class RegistrationServlet extends HttpServlet {
+	private static final Logger logger = LogManager.getLogger(RegistrationServlet.class);
+
+	/**
+	 * This method tries to register a new user with the data from the request. If
+	 * success, new user is added to the session. Otherwise an error page is displayed
+	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		User u = null;
 		try {
-			User u = UserDAO.getUserByLogin(req.getParameter(SQLConstants.LOGIN));
+			u = MySQLUserDAO.getUserByLogin(req.getParameter(SQLConstants.LOGIN));
 			if (u == null) {
 				u = new User();
 				u.setLogin(req.getParameter(SQLConstants.LOGIN));
@@ -32,13 +50,17 @@ public class RegistrationServlet extends HttpServlet {
 				u.setRoleId(SQLConstants.CLIENT_ROLE_ID);
 				u.setEmail(req.getParameter(SQLConstants.EMAIL));
 				u.setPhoneNum(req.getParameter(SQLConstants.PHONE_NUM));
-				UserDAO.insertUser(u);
-				req.getSession().setAttribute("client", UserDAO.getUserByLogin(u.getLogin()));
+				MySQLUserDAO.insertUser(u);
+				req.getSession().setAttribute("client", MySQLUserDAO.getUserByLogin(u.getLogin()));
 				resp.sendRedirect("/FinalProject/client");
+			} else {
+				req.setAttribute("error_message", "User with this login already exists!");
+				req.getRequestDispatcher("view/error/error.jsp").forward(req, resp);
+				;
 			}
 		} catch (DAOException e) {
-			e.printStackTrace();
+			logger.error("Error registering a new user " + u);
 		}
-		
+
 	}
 }

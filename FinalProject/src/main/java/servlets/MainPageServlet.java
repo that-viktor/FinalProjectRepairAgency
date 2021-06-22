@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 /**
- * This is MainPageServlet that represents the main page of the application
+ * This is MainPageServlet that represents the main page of the application and sets the default locale as EN
  * @author Viktor
  *
  */
@@ -18,6 +18,11 @@ public class MainPageServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		String locale = (String) req.getSession().getAttribute("lang");
+		if (locale == null) {
+			req.getSession().setAttribute("lang", "en");
+		}
+		System.out.println("/main locale after setting " + req.getSession().getAttribute("lang"));
 		req.getRequestDispatcher("index.jsp").forward(req, resp);
 	}
 }

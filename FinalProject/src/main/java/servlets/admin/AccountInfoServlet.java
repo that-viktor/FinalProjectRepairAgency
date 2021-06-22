@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.AccountDAO;
-import dao.UserDAO;
+import dao.MySQLAccountDAO;
+import dao.MySQLUserDAO;
 import database.DBManager;
 import database.SQLConstants;
 import entities.Account;
@@ -50,7 +50,7 @@ public class AccountInfoServlet extends HttpServlet {
 			if (idToParse != null) {
 				id = Long.parseLong(idToParse);
 				try {
-					client = UserDAO.getUserById(id);
+					client = MySQLUserDAO.getUserById(id);
 				} catch (DAOException e) {
 					logger.error("Error getting client by id " + id, e);
 				}
@@ -60,12 +60,12 @@ public class AccountInfoServlet extends HttpServlet {
 			}
 			Account account = null;
 			try {
-				account = AccountDAO.getAccountById(client.getAccountId());
+				account = MySQLAccountDAO.getAccountById(client.getAccountId());
 			} catch (DAOException e) {
 				logger.error("Error getting account by id " + client.getAccountId(), e);
 			}
 			try {
-				req.getSession().setAttribute("accountClient", UserDAO.getUserById(id));
+				req.getSession().setAttribute("accountClient", MySQLUserDAO.getUserById(id));
 				req.getSession().setAttribute("account", account);
 				req.getRequestDispatcher("view/client/client-info.jsp").forward(req, resp);
 			} catch (DAOException e) {

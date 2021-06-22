@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.ReceiptDAO;
-import dao.StatusDAO;
-import dao.UserDAO;
+import dao.MySQLReceiptDAO;
+import dao.MySQLStatusDAO;
+import dao.MySQLUserDAO;
 import database.SQLConstants;
 import exceptions.DAOException;
 import servlets.comment.DeleteCommentServlet;
@@ -38,25 +38,25 @@ public class DateFilterServlet extends HttpServlet {
 		String filter = req.getParameter(SQLConstants.REC_DATE);
 		if (filter.equals(SQLConstants.ASC)) {
 			try {
-				req.setAttribute("receipts", ReceiptDAO.getAllReceiptsOrderedByDate(false));
+				req.setAttribute("receipts", MySQLReceiptDAO.getAllReceiptsOrderedByDate(false));
 			} catch (DAOException e) {
 				logger.error("Error getting all the receipts ordered by date ascending!", e);
 			}
 		}
 		if (filter.equals(SQLConstants.DESC)) {
 			try {
-				req.setAttribute("receipts", ReceiptDAO.getAllReceiptsOrderedByDate(true));
+				req.setAttribute("receipts", MySQLReceiptDAO.getAllReceiptsOrderedByDate(true));
 			} catch (DAOException e) {
 				logger.error("Error getting all the receipts ordered by date descending!", e);
 			}
 		}
 		try {
-			req.setAttribute("statuses", StatusDAO.getAllStatuses());
+			req.setAttribute("statuses", MySQLStatusDAO.getAllStatuses());
 		} catch (DAOException e) {
 			logger.error("Error getting all the statuses after filtering by date!", e);
 		}
 		try {
-			req.setAttribute("masters", UserDAO.getUsersByRole(SQLConstants.MASTER_ROLE_ID));
+			req.setAttribute("masters", MySQLUserDAO.getUsersByRole(SQLConstants.MASTER_ROLE_ID));
 		} catch (DAOException e) {
 			logger.error(
 					"Error getting all users by role id " + SQLConstants.MASTER_ROLE_ID + " after filtering by date!",

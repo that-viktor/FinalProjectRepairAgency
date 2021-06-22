@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.CommentDAO;
+import dao.MySQLCommentDAO;
 import entities.Comment;
 import entities.User;
 import exceptions.DAOException;
@@ -41,7 +41,7 @@ public class ClientCommentsServlet extends HttpServlet {
 		} else {
 			HttpSession s = req.getSession();
 			try {
-				List<Comment> comments = CommentDAO.getAllComments();
+				List<Comment> comments = MySQLCommentDAO.getAllComments();
 				s.setAttribute("comments", comments);
 				s.setAttribute("commentsCount", comments.size());
 				req.getRequestDispatcher("view/comment/client-comment.jsp").forward(req, resp);

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.ReceiptDAO;
+import dao.MySQLReceiptDAO;
 import entities.Receipt;
 import entities.User;
 import exceptions.DAOException;
@@ -39,7 +39,7 @@ public class MasterServlet extends HttpServlet {
 			resp.sendRedirect("/FinalProject/login");
 		} else {
 			try {
-				List<Receipt> masterReceipts = ReceiptDAO.getMasterReceipts(master.getId());
+				List<Receipt> masterReceipts = MySQLReceiptDAO.getMasterReceipts(master.getId());
 				req.getSession().setAttribute("masterReceipts", masterReceipts);
 				req.getSession().setAttribute("receiptsCount", masterReceipts.size());
 			} catch (DAOException e) {

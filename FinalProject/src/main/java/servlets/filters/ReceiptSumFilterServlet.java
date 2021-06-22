@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.ReceiptDAO;
-import dao.StatusDAO;
-import dao.UserDAO;
+import dao.MySQLReceiptDAO;
+import dao.MySQLStatusDAO;
+import dao.MySQLUserDAO;
 import database.SQLConstants;
 import exceptions.DAOException;
 
@@ -37,25 +37,25 @@ public class ReceiptSumFilterServlet extends HttpServlet {
 		String filter = req.getParameter(SQLConstants.TOTAL_SUM);
 		if (filter.equals(SQLConstants.ASC)) {
 			try {
-				req.setAttribute("receipts", ReceiptDAO.getAllReceiptsOrderedByReceiptSum(false));
+				req.setAttribute("receipts", MySQLReceiptDAO.getAllReceiptsOrderedByReceiptSum(false));
 			} catch (DAOException e) {
 				logger.error("Error getting all the receipts filtered by receipt sum ascending!", e);
 			}
 		}
 		if (filter.equals(SQLConstants.DESC)) {
 			try {
-				req.setAttribute("receipts", ReceiptDAO.getAllReceiptsOrderedByReceiptSum(true));
+				req.setAttribute("receipts", MySQLReceiptDAO.getAllReceiptsOrderedByReceiptSum(true));
 			} catch (DAOException e) {
 				logger.error("Error getting all the receipts filtered by receipt sum descending!", e);
 			}
 		}
 		try {
-			req.setAttribute("statuses", StatusDAO.getAllStatuses());
+			req.setAttribute("statuses", MySQLStatusDAO.getAllStatuses());
 		} catch (DAOException e) {
 			logger.error("Error getting all the statuses after filtering all the receipts by receipt sum!", e);
 		}
 		try {
-			req.setAttribute("masters", UserDAO.getUsersByRole(SQLConstants.MASTER_ROLE_ID));
+			req.setAttribute("masters", MySQLUserDAO.getUsersByRole(SQLConstants.MASTER_ROLE_ID));
 		} catch (DAOException e) {
 			logger.error("Error getting all the masters after filtering all the receipts by receipt sum!", e);
 		}

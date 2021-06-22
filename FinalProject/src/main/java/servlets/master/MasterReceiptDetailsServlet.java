@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.ReceiptDAO;
-import dao.ServiceDAO;
-import dao.StatusDAO;
+import dao.MySQLReceiptDAO;
+import dao.MySQLServiceDAO;
+import dao.MySQLStatusDAO;
 import database.SQLConstants;
 import entities.Receipt;
 import entities.Service;
@@ -48,13 +48,13 @@ public class MasterReceiptDetailsServlet extends HttpServlet {
 		}
 		List<Service> receiptServices = null;
 		try {
-			receiptServices = ServiceDAO.getReceiptServices(id);
+			receiptServices = MySQLServiceDAO.getReceiptServices(id);
 		} catch (DAOException e1) {
 			logger.error("Error gettins services of the receipt  with id = " + id + "!", e1);
 		}
 		Receipt masterReceipt = null;
 		try {
-			masterReceipt = ReceiptDAO.getReceiptById(id);
+			masterReceipt = MySQLReceiptDAO.getReceiptById(id);
 		} catch (DAOException e1) {
 			logger.error("Error gettins receipt with id = " + id + "!", e1);
 		}
@@ -62,7 +62,7 @@ public class MasterReceiptDetailsServlet extends HttpServlet {
 			req.getSession().setAttribute("masterReceiptDetails", masterReceipt);
 			req.getSession().setAttribute("masterReceiptServices", receiptServices);
 			req.getSession().setAttribute("masterDetailsIdreceipt", id);
-			req.getSession().setAttribute("masterReceiptStatus", StatusDAO.getReceiptStatusAsString(masterReceipt));
+			req.getSession().setAttribute("masterReceiptStatus", MySQLStatusDAO.getReceiptStatusAsString(masterReceipt));
 			req.getRequestDispatcher("/view/master/master-receipt-details.jsp").forward(req, resp);
 		} catch (DAOException e) {
 			logger.error("Error gettins receipt status as string   with receipt id = " + id + "!", e);

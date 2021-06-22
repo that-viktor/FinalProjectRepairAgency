@@ -9,7 +9,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.UserDAO;
+import dao.MySQLUserDAO;
 import entities.Comment;
 import entities.User;
 import exceptions.DAOException;
@@ -44,7 +44,7 @@ public class AdminCommentTag extends TagSupport {
 	public int doStartTag() throws JspException {
 		try {
 			String date = new SimpleDateFormat("dd-MM-yyyy HH:mm").format(comment.getCommentDate());
-			User commentAuthor = UserDAO.getUserById(comment.getUserId());
+			User commentAuthor = MySQLUserDAO.getUserById(comment.getUserId());
 			pageContext.getOut().append("<b>").append(commentAuthor.getFirstName()).append(" ")
 					.append(commentAuthor.getLastName()).append("</b><br>").append(comment.getCommentText())
 					.append("<br>").append(date).append("<br>");

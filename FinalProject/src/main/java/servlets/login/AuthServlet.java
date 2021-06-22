@@ -12,7 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import cryptho.SimplePasswordEncoder;
-import dao.UserDAO;
+import dao.MySQLUserDAO;
 import database.SQLConstants;
 import entities.User;
 import exceptions.DAOException;
@@ -39,7 +39,7 @@ public class AuthServlet extends HttpServlet {
 		String login = req.getParameter(SQLConstants.LOGIN);
 		String pass = req.getParameter(SQLConstants.PASSWORD);
 		try {
-			User u = UserDAO.getUserByLogin(login);
+			User u = MySQLUserDAO.getUserByLogin(login);
 			if (u != null) {
 				redirectUser(req, resp, pass, u);
 			} else {

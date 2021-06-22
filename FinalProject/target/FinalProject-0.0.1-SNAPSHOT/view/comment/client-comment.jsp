@@ -12,10 +12,20 @@
 </head>
 <body>
 <h1 class="page_header">Comments</h1>
-	<form action="/FinalProject/client">
+	<div class="content">
+	<comments:commentTag/>
+	<br>
+	
+	<form action="/FinalProject/add-comment" class="center_header" method="POST">
+		<textarea rows="15" cols="70" required name="commentText" placeholder="Type your comment here"></textarea>
+		<button class="center_button">Leave a comment</button>
+	</form>
+	
+	<form action="/FinalProject/client" class="page_header">
 		<button class="button">Back</button>
 	</form>
-
-	<comments:commentTag/>
+	
+	</div>
+	
 </body>
 </html>

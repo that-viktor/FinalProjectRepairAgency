@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.CommentDAO;
+import dao.MySQLCommentDAO;
 import entities.Comment;
 import exceptions.DAOException;
 
@@ -39,7 +39,7 @@ public class AdminCommentServlet extends HttpServlet {
 			resp.sendRedirect("/FinalProject/login");
 		} else {
 			try {
-				List<Comment> comments = CommentDAO.getAllComments();
+				List<Comment> comments = MySQLCommentDAO.getAllComments();
 				req.getSession().setAttribute("adminComments", comments);
 			} catch (DAOException e) {
 				logger.error("Error getting the comments page from the admin side!", e);

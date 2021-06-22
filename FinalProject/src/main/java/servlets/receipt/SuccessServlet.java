@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * SuccessServlet provides success page after forming a receipt by client
+ * 
+ * @author Viktor
+ *
+ */
 @WebServlet("/success")
 public class SuccessServlet extends HttpServlet {
 	@Override

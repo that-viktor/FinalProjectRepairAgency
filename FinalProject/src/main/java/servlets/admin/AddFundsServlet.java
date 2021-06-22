@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.AccountDAO;
+import dao.MySQLAccountDAO;
 import database.SQLConstants;
 import entities.User;
 import exceptions.DAOException;
@@ -38,12 +38,12 @@ public class AddFundsServlet extends HttpServlet {
 			double sum = Double.parseDouble(req.getParameter(SQLConstants.SUM_TO_INCREASE_BALANCE));
 			User client = (User) req.getSession().getAttribute("accountClient");
 			try {
-				AccountDAO.topUpBalance(client, sum);
+				MySQLAccountDAO.topUpBalance(client, sum);
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
 			try {
-				req.getSession().setAttribute("account", AccountDAO.getAccountById(client.getAccountId()));
+				req.getSession().setAttribute("account", MySQLAccountDAO.getAccountById(client.getAccountId()));
 			} catch (DAOException e) {
 				req.setAttribute("error_message", "Invalid nubmer format. Sum must be > 0");
 				req.getRequestDispatcher("view/error/error.jsp").forward(req, resp);

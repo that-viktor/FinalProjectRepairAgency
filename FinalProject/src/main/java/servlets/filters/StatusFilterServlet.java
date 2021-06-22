@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.ReceiptDAO;
-import dao.StatusDAO;
-import dao.UserDAO;
+import dao.MySQLReceiptDAO;
+import dao.MySQLStatusDAO;
+import dao.MySQLUserDAO;
 import database.SQLConstants;
 import exceptions.DAOException;
 
@@ -40,17 +40,17 @@ public class StatusFilterServlet extends HttpServlet {
 			req.getRequestDispatcher("/receipts").forward(req, resp);
 		} else {
 			try {
-				req.setAttribute("receipts", ReceiptDAO.getReceiptsByStatus(idstatus));
+				req.setAttribute("receipts", MySQLReceiptDAO.getReceiptsByStatus(idstatus));
 			} catch (DAOException e1) {
 				logger.error("Error getting all the receipts filtered by status id = " + idstatus + "!", e1);
 			}
 			try {
-				req.setAttribute("statuses", StatusDAO.getAllStatuses());
+				req.setAttribute("statuses", MySQLStatusDAO.getAllStatuses());
 			} catch (DAOException e1) {
 				logger.error("Error getting all the statuses after filtering all the receipts by status id = " + idstatus + "!", e1);
 			}
 			try {
-				req.setAttribute("masters", UserDAO.getUsersByRole(SQLConstants.MASTER_ROLE_ID));
+				req.setAttribute("masters", MySQLUserDAO.getUsersByRole(SQLConstants.MASTER_ROLE_ID));
 			} catch (DAOException e) {
 				logger.error("Error getting all the masters after filtering all the receipts by status id = " + idstatus + "!", e);
 			}

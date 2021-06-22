@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.UserDAO;
+import dao.MySQLUserDAO;
 import database.SQLConstants;
 import exceptions.DAOException;
 
@@ -36,7 +36,7 @@ public class ClientsListServlet extends HttpServlet {
 			resp.sendRedirect("/FinalProject/login");
 		} else {
 			try {
-				req.setAttribute("clients", UserDAO.getUsersByRole(SQLConstants.CLIENT_ROLE_ID));
+				req.setAttribute("clients", MySQLUserDAO.getUsersByRole(SQLConstants.CLIENT_ROLE_ID));
 				req.getRequestDispatcher("view/client/clients-list.jsp").forward(req, resp);
 			} catch (DAOException e) {
 				logger.error("Error getting users by role!", e);

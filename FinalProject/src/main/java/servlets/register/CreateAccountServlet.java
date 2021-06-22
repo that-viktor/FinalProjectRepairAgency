@@ -7,7 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+/**
+ * CreateAccountServlet displays the registration form
+ * @author Viktor
+ *
+ */
 @WebServlet("/registerForm")
 public class CreateAccountServlet extends HttpServlet {
 	@Override

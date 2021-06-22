@@ -4,19 +4,18 @@
 	<h1>No comments for now</h1>
 </c:if>
 <c:if test="${commentsCount != 0}">
-<div class="comments">
-		<c:forEach items="${comments}" var="comment">
-			<div class="comment_block">
-				<h3>Anonymous</h3>
+	<c:forEach items="${comments}" var="comment">
+		<div class="comment_wrapper">
+		<div class="center_content">
+				<h3>Anonymous</h3><hr>
 				<p>${comment.commentText}</p>
 				<p>
 					<small><fmt:formatDate pattern="dd-MM-yyyy HH:mm"
 							type="date" value="${comment.commentDate}" /> </small>
 				</p>
-				<hr>
 				<br>
 			</div>
-
-		</c:forEach>
-	</div>
+			
+		</div>
+	</c:forEach>
 </c:if>

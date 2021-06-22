@@ -15,7 +15,7 @@
 				<td class="td">${masterReceipt.id}</td>
 				<td class="td"><fmt:formatDate pattern="dd-MM-yyyy HH:mm"
 								type="date" value="${masterReceipt.date}"/></td>
-				<td class="td">${masterReceipt.totalSum}</td>
+				<td class="td">${masterReceipt.totalSum} UAH</td>
 				<td class="td">
 					<form action="/FinalProject/master-receipt-details">
 						<button class="button" name="idreceipt" value="${masterReceipt.id}">Details</button>

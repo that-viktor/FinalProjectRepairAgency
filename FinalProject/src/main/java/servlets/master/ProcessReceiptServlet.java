@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.ReceiptDAO;
+import dao.MySQLReceiptDAO;
 import database.SQLConstants;
 import entities.Receipt;
 import exceptions.DAOException;
@@ -41,19 +41,19 @@ public class ProcessReceiptServlet extends HttpServlet {
 			Receipt receiptToProcess = (Receipt) req.getSession().getAttribute("masterReceiptDetails");
 			if (receiptToProcess.getStatus() == SQLConstants.STATUS_PAYED_ID) {
 				try {
-					ReceiptDAO.updateReceiptStatusByReceiptId(receiptToProcess.getId(),
+					MySQLReceiptDAO.updateReceiptStatusByReceiptId(receiptToProcess.getId(),
 							SQLConstants.STATUS_PROCESSING_ID);
 					receiptToProcess.setStatus(SQLConstants.STATUS_PROCESSING_ID);
 				} catch (DAOException e) {
-					logger.error("Error updating status " + receiptToProcess.getStatus() + " to " + SQLConstants.STATUS_PROCESSING);
+					logger.error("Error updating status " + receiptToProcess.getStatus() + " to " + SQLConstants.STATUS_PROCESSING_ID, e);
 				}
 			} else {
 				try {
-					ReceiptDAO.updateReceiptStatusByReceiptId(receiptToProcess.getId(),
+					MySQLReceiptDAO.updateReceiptStatusByReceiptId(receiptToProcess.getId(),
 							SQLConstants.STATUS_PROCESSED_ID);
 					receiptToProcess.setStatus(SQLConstants.STATUS_PROCESSED_ID);
 				} catch (DAOException e) {
-					e.printStackTrace();
+					logger.error("Error updating status " + receiptToProcess.getStatus() + " to " + SQLConstants.STATUS_PROCESSED_ID, e);
 				}
 			}
 			req.getSession().setAttribute("masterReceiptDetails", receiptToProcess);

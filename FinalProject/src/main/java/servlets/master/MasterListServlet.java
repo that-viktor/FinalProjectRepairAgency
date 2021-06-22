@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.UserDAO;
+import dao.MySQLUserDAO;
 import database.SQLConstants;
 import exceptions.DAOException;
 
@@ -34,7 +34,7 @@ public class MasterListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		long idreceipt = Long.parseLong(req.getParameter(SQLConstants.ID_RECEIPT));
 		try {
-			req.setAttribute("masters", UserDAO.getUsersByRole(SQLConstants.MASTER_ROLE_ID));
+			req.setAttribute("masters", MySQLUserDAO.getUsersByRole(SQLConstants.MASTER_ROLE_ID));
 			req.setAttribute("idreceipt", idreceipt);
 			req.getRequestDispatcher("view/master/masters.jsp").forward(req, resp);
 		} catch (DAOException e) {

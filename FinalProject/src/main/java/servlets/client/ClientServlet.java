@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.AccountDAO;
-import dao.ReceiptDAO;
-import dao.ServiceDAO;
+import dao.MySQLAccountDAO;
+import dao.MySQLReceiptDAO;
+import dao.MySQLServiceDAO;
 import database.SQLConstants;
 import entities.User;
 import exceptions.DAOException;
@@ -58,17 +58,17 @@ public class ClientServlet extends HttpServlet {
 				logger.error("Error creating pages array!", e1);
 			}
 			try {
-				req.setAttribute("services", ServiceDAO.getServicesLimited(offset));
+				req.setAttribute("services", MySQLServiceDAO.getServicesLimited(offset));
 			} catch (DAOException e1) {
 				logger.error("Error getting services limited by offset " + offset, e1);
 			}
 			try {
-				req.getSession().setAttribute("account", AccountDAO.getAccountById(client.getAccountId()));
+				req.getSession().setAttribute("account", MySQLAccountDAO.getAccountById(client.getAccountId()));
 			} catch (DAOException e1) {
 				logger.error("Error getting account by id " + client.getAccountId(), e1);
 			}
 			try {
-				req.getSession().setAttribute("clientReceipts", ReceiptDAO.getClientReceipts(client.getId()));
+				req.getSession().setAttribute("clientReceipts", MySQLReceiptDAO.getClientReceipts(client.getId()));
 			} catch (DAOException e) {
 				logger.error("Error getting client " + client + " receipts!", e);
 			}
@@ -84,7 +84,7 @@ public class ClientServlet extends HttpServlet {
 	}
 
 	private int[] createPagesArray() throws DAOException {
-		int pagesCount = (ServiceDAO.getAllServices().size() / SQLConstants.LIMIT) + 1;
+		int pagesCount = (MySQLServiceDAO.getAllServices().size() / SQLConstants.LIMIT) + 1;
 		int[] pages = new int[pagesCount];
 		for (int i = 0; i < pages.length; i++) {
 			pages[i] = i + 1;

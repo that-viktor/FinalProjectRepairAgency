@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import dao.ReceiptDAO;
-import dao.StatusDAO;
-import dao.UserDAO;
+import dao.MySQLReceiptDAO;
+import dao.MySQLStatusDAO;
+import dao.MySQLUserDAO;
 import database.SQLConstants;
 import exceptions.DAOException;
 
@@ -36,18 +36,18 @@ public class MasterFilterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		long id = Long.parseLong(req.getParameter(SQLConstants.ID_MASTER));
 		try {
-			req.setAttribute("receipts", ReceiptDAO.getAllReceiptsFilteredByMaster(id));
+			req.setAttribute("receipts", MySQLReceiptDAO.getAllReceiptsFilteredByMaster(id));
 		} catch (DAOException e2) {
 			logger.error("Error getting all the receipts filtered by master id = " + id + "!", e2);
 		}
 		try {
-			req.setAttribute("statuses", StatusDAO.getAllStatuses());
+			req.setAttribute("statuses", MySQLStatusDAO.getAllStatuses());
 		} catch (DAOException e1) {
 			logger.error("Error getting all the statuses after filtering all the receipts by master id = " + id + "!",
 					e1);
 		}
 		try {
-			req.setAttribute("masters", UserDAO.getUsersByRole(SQLConstants.MASTER_ROLE_ID));
+			req.setAttribute("masters", MySQLUserDAO.getUsersByRole(SQLConstants.MASTER_ROLE_ID));
 
 		} catch (DAOException e) {
 			logger.error("Error getting all the users by role id = " + SQLConstants.MASTER_ROLE_ID

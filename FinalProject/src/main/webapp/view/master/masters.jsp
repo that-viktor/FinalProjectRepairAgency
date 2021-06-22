@@ -9,7 +9,20 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<h1>List of masters</h1>
+<div class="header">
+		<div class="bar">
+			<div class="website_header">
+				<a href="/FinalProject/main" class="main_title">Electronic
+					repair agency website</a>
+			</div>
+			<a href="/FinalProject/receipts" class="a">View Receipts</a> <a
+				href="/FinalProject/clients-list" class="a">Add funds to user</a> <a
+				href="/FinalProject/admin-comments" class="a">Check the comments</a>
+		</div>
+	</div>
+	<div class="content">
+		<div class="wrapper">
+		<h1 class="center_text">List of masters</h1><hr>
 	<table class="table">
 		<th class="th">Master no</th>
 		<th class="th">Master name</th>
@@ -25,8 +38,11 @@
 	</table>
 
 	<br>
-	<form action="/FinalProject/details">
-		<button name="idreceipt" value="${requestScope.idreceipt}" class="button">Back</button>
+	<form action="/FinalProject/details" class="center_form">
+		<button name="idreceipt" value="${requestScope.idreceipt}" class="ref_button">Back</button>
 	</form>
+		</div>
+	</div>
+	
 </body>
 </html>

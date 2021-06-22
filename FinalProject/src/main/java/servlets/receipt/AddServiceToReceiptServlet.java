@@ -3,6 +3,7 @@ package servlets.receipt;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,14 +11,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.ServiceDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import dao.MySQLServiceDAO;
 import entities.ReceiptService;
 import exceptions.DAOException;
 
+/**
+ * AddServiceToReceiptServlet class provides method for adding selected services
+ * to the particular receipt
+ * 
+ * @author Viktor
+ *
+ */
 @WebServlet("/add-service")
 public class AddServiceToReceiptServlet extends HttpServlet {
+	private static final Logger logger = LogManager.getLogger(AddServiceToReceiptServlet.class);
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		List<ReceiptService> receiptServices;
 		List<Long> selectedServices;
 		if (req.getSession().getAttribute("receiptServices") == null) {
@@ -38,20 +52,18 @@ public class AddServiceToReceiptServlet extends HttpServlet {
 			} else {
 				ReceiptService service = new ReceiptService();
 				service.setServiceId(serviceId);
-				servicePrice = ServiceDAO.getServicePriceById(serviceId);
+				servicePrice = MySQLServiceDAO.getServicePriceById(serviceId);
 				service.setServicePrice(servicePrice);
 				receiptServices.add(service);
 				selectedServices.add(serviceId);
 				req.getSession().setAttribute("receiptServices", receiptServices);
 				req.getSession().setAttribute("selectedServices", selectedServices);
 				req.getSession().setAttribute("servicesCount", receiptServices.size());
-				System.out.println(receiptServices);
-				System.out.println(selectedServices);
 				resp.sendRedirect("/FinalProject/client");
 			}
-
 		} catch (DAOException e) {
-			e.printStackTrace();
+			logger.error("Error adding service to the receipt services = " + receiptServices
+					+ " with selected services = " + selectedServices, e);
 		}
 	}
 
